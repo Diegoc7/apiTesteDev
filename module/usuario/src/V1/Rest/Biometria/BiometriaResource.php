@@ -3,9 +3,15 @@ namespace usuario\V1\Rest\Biometria;
 
 use Laminas\ApiTools\ApiProblem\ApiProblem;
 use Laminas\ApiTools\Rest\AbstractResourceListener;
-
+use usuario\V1\Rest\Biometria\Abstracts\ABiometriaMapper;
 class BiometriaResource extends AbstractResourceListener
 {
+
+    private $mapper;
+    public function __construct(ABiometriaMapper $mapper)
+    {
+        $this->mapper = $mapper;
+    }
     /**
      * Create a resource
      *
@@ -46,8 +52,8 @@ class BiometriaResource extends AbstractResourceListener
      * @return ApiProblem|mixed
      */
     public function fetch($id)
-    {return array('teste');
-        return new ApiProblem(405, 'The GET method has not been defined for individual resources');
+    {
+      return  $this->mapper->fetch((int)$id);
     }
 
     /**
