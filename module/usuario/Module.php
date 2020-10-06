@@ -19,14 +19,14 @@ class Module implements ApiToolsProviderInterface
 
         return array(
             'factories' => array(
-                'UsuarioTableGateway' => function($sm){
+                'UsuarioBiometriaTableGateway' => function($sm){
                     $dbAdapter = $sm->get('db');
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new BiometriaEntity());
-                    return new TableGateway('usuario',$dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('biometria',$dbAdapter, null, $resultSetPrototype);
                 },
                 'usuario\V1\Rest\Biometria\BiometriaMapper' => function($sm) {
-                    $tableGateway = $sm->get('LojaClienteTableGateway');
+                    $tableGateway = $sm->get('UsuarioBiometriaTableGateway');
                     return new BiometriaMapper($tableGateway);
                 }
                 )

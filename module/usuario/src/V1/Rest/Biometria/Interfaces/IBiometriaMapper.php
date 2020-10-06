@@ -9,9 +9,9 @@ interface IBiometriaMapper
 {
     public  function fetchAll();
 
-    public  function fetch(int $id);
+    public  function fetch($id);
 
     public  function save();
 
-    public  function delete(int $id);
+    public  function delete($id);
 }

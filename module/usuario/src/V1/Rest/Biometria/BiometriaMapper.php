@@ -20,15 +20,16 @@ class BiometriaMapper extends ABiometriaMapper
         $this->tableGateway = $tableGateway;
     }
 
-    public function delete(int $id)
+    public function delete($id)
     {
         
     }
 
-    public function fetch(int $id)
+    public function fetch($id)
     {
-        $resultSet = $this->tableGateway->select(array('int'=>$id));
-         return $resultSet;
+        $resultSet = $this->tableGateway->select(array('id'=>$id));
+        $row = $resultSet->current();
+         return $row;
     }
 
     public function fetchAll()

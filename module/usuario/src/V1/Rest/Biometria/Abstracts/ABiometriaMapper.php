@@ -10,9 +10,9 @@ abstract class ABiometriaMapper implements IBiometriaMapper
 {
     public abstract function fetchAll();
 
-    public abstract function fetch(int $id);
+    public abstract function fetch($id);
 
     public abstract function save();
 
-    public abstract function delete(int $id);
+    public abstract function delete($id);
 }
