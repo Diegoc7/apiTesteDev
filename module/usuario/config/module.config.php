@@ -189,6 +189,9 @@ return [
         'usuario\\V1\\Rpc\\Cadastrar\\Controller' => [
             'input_filter' => 'usuario\\V1\\Rpc\\Cadastrar\\Validator',
         ],
+        'usuario\\V1\\Rest\\Biometria\\Controller' => [
+            'input_filter' => 'usuario\\V1\\Rest\\Biometria\\Validator',
+        ],
     ],
     'input_filter_specs' => [
         'usuario\\V1\\Rpc\\Cadastrar\\Validator' => [
@@ -208,6 +211,30 @@ return [
                 ],
                 'name' => 'nome',
                 'description' => 'inserção do nome do usuário',
+            ],
+        ],
+        'usuario\\V1\\Rest\\Biometria\\Validator' => [
+            0 => [
+                'required' => true,
+                'validators' => [],
+                'filters' => [
+                    0 => [
+                        'name' => \Laminas\Filter\ToInt::class,
+                        'options' => [],
+                    ],
+                ],
+                'name' => 'id_usuario',
+                'description' => 'ID do usuário vinculado a biometria',
+                'error_message' => 'usuário inválido.',
+            ],
+            1 => [
+                'required' => true,
+                'validators' => [],
+                'filters' => [],
+                'name' => 'arquivo',
+                'description' => 'arquivo com a biometria do tipo WSQ',
+                'type' => \Laminas\InputFilter\FileInput::class,
+                'error_message' => 'não foi possivel efetuar o upload do arquivo.',
             ],
         ],
     ],
