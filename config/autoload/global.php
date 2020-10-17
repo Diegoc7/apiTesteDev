@@ -9,4 +9,15 @@ return [
             'db' => [],
         ],
     ],
+    'router' => [
+        'routes' => [
+            'oauth' => [
+                'options' => [
+                    'spec' => '%oauth%',
+                    'regex' => '(?P<oauth>(/autenticacao))',
+                ],
+                'type' => 'regex',
+            ],
+        ],
+    ],
 ];

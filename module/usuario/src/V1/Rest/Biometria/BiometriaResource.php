@@ -53,6 +53,9 @@ class BiometriaResource extends AbstractResourceListener
      */
     public function fetch($id)
     {
+
+       $data = $this->getInputFilter();
+       var_dump($data);exit;
       return  $this->mapper->fetch((int)$id);
     }
 

@@ -10,7 +10,9 @@ namespace usuario\V1\Rest\Biometria;
 
 use Laminas\Db\TableGateway\AbstractTableGateway;
 use usuario\V1\Rest\Biometria\Abstracts\ABiometriaMapper;
-
+use usuario\V1\Rest\Biometria\Exceptions\IdBiometriaInvalidoException;
+use usuario\V1\Rest\Biometria\Exceptions\BiometriaNaoEncontradaException;
+use Laminas\ApiTools\Doctrine\Server\Event\DoctrineResourceEvent;
 class BiometriaMapper extends ABiometriaMapper
 {
     private $tableGateway;
@@ -25,11 +27,18 @@ class BiometriaMapper extends ABiometriaMapper
         
     }
 
-    public function fetch($id)
+    public function fetch( $id)
     {
-        $resultSet = $this->tableGateway->select(array('id'=>$id));
-        $row = $resultSet->current();
-         return $row;
+//        \Laminas\Authentication\Adapter\
+//        phpinfo();
+//        var_dump(info);exit;
+        $this->validaIdBiometria($id);
+        $resposta = $this->tableGateway->select(array('id'=>$id));
+        $biometria = $resposta->current();
+        if(!$biometria){
+             throw new BiometriaNaoEncontradaException("Biometria não encontrada.");
+        }
+         return $biometria;
     }
 
     public function fetchAll()
@@ -41,5 +50,11 @@ class BiometriaMapper extends ABiometriaMapper
     public function save()
     {
 
+    }
+
+    private function validaIdBiometria($id){
+        if(!is_int($id) || ((int) $id) <= 0){
+            throw new IdBiometriaInvalidoException("Parametro ID da Biometria invalido.");
+        }
     }
 }
