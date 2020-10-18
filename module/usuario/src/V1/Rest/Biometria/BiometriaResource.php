@@ -54,7 +54,18 @@ class BiometriaResource extends AbstractResourceListener
     public function fetch($id)
     {
 
-       $data = $this->getInputFilter();
+//        \Laminas\ApiTools\ContentNegotiation\ControllerPlugins\
+//
+//       $t2 = new \Laminas\ApiTools\ContentNegotiation\ControllerPlugin\QueryParams();
+//       \Laminas\ApiTools\ContentNegotiation\ControllerPlugin\QueryParam::setController($controller);
+       $requisicao = new \Laminas\Http\Request();
+//       $t2->
+//        Param
+//        \Doctrine\Instantiator\Instantiator::class;
+//      $t = new \Laminas\Mvc\Controller\Plugin\Params();
+//      $t->setController($t2);
+      $data = $requisicao->getQuery('id_usuario',1);
+//       $data = $this->params()->fromQuery('id_usuario');
        var_dump($data);exit;
       return  $this->mapper->fetch((int)$id);
     }

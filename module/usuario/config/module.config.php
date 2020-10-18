@@ -361,7 +361,12 @@ return [
             ],
             1 => [
                 'required' => true,
-                'validators' => [],
+                'validators' => [
+                    0 => [
+                        'name' => \Laminas\Validator\File\Exists::class,
+                        'options' => [],
+                    ],
+                ],
                 'filters' => [],
                 'name' => 'arquivo',
                 'description' => 'arquivo com a biometria do tipo WSQ',
