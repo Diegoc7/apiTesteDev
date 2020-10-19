@@ -6,5 +6,7 @@ namespace usuario\V1\Rest\Biometria\Interfaces;
  */
 interface IBiometriaEntity
 {
+    public function getArrayCopy();
     
+    public function exchangeArray(array $array);
 }

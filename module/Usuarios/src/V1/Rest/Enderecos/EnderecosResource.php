@@ -1,17 +1,11 @@
 <?php
-namespace usuario\V1\Rest\Biometria;
+namespace Usuarios\V1\Rest\Enderecos;
 
 use Laminas\ApiTools\ApiProblem\ApiProblem;
 use Laminas\ApiTools\Rest\AbstractResourceListener;
-use usuario\V1\Rest\Biometria\Abstracts\ABiometriaMapper;
-class BiometriaResource extends AbstractResourceListener
-{
 
-    private $mapper;
-    public function __construct(ABiometriaMapper $mapper)
-    {
-        $this->mapper = $mapper;
-    }
+class EnderecosResource extends AbstractResourceListener
+{
     /**
      * Create a resource
      *
@@ -20,16 +14,7 @@ class BiometriaResource extends AbstractResourceListener
      */
     public function create($data)
     {
-      $destino = 'data'.DIRECTORY_SEPARATOR.'biometrias';
-
-     $uploadArquivo = new \usuario\Ferramentas\Arquivo($this->getInputFilter()->getValue('arquivo'), $destino);
-     $arquivo = $uploadArquivo->mover();
-
-     $entidade = new BiometriaEntity();
-     $entidade->setIdUsuario($this->getInputFilter()->getValue('id_usuario'));
-     $entidade->setArquivo($arquivo);
-     return $this->mapper->save(array($entidade));
-     
+        return new ApiProblem(405, 'The POST method has not been defined');
     }
 
     /**
@@ -62,9 +47,7 @@ class BiometriaResource extends AbstractResourceListener
      */
     public function fetch($id)
     {
-        
-        $idUsuario = filter_input(INPUT_GET, 'id_usuario');
-      return  $this->mapper->fetch((int)$id, (int) $idUsuario);
+        return new ApiProblem(405, 'The GET method has not been defined for individual resources');
     }
 
     /**
@@ -75,7 +58,7 @@ class BiometriaResource extends AbstractResourceListener
      */
     public function fetchAll($params = [])
     {
-      return $this->mapper->fetchAll($params);
+        return new ApiProblem(405, 'The GET method has not been defined for collections');
     }
 
     /**

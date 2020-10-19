@@ -164,6 +164,8 @@ return [
             'collection_http_methods' => [
                 0 => 'GET',
                 1 => 'POST',
+                2 => 'PUT',
+                3 => 'DELETE',
             ],
             'collection_query_whitelist' => [],
             'page_size' => 25,
@@ -366,8 +368,19 @@ return [
                         'name' => \Laminas\Validator\File\Exists::class,
                         'options' => [],
                     ],
+                    1 => [
+                        'name' => \Laminas\Validator\File\ExcludeMimeType::class,
+                        'options' => [],
+                    ],
                 ],
-                'filters' => [],
+                'filters' => [
+                    0 => [
+                        'name' => \Laminas\Filter\File\RenameUpload::class,
+                        'options' => [
+                            'randomize' => true,
+                        ],
+                    ],
+                ],
                 'name' => 'arquivo',
                 'description' => 'arquivo com a biometria do tipo WSQ',
                 'type' => \Laminas\InputFilter\FileInput::class,
@@ -551,18 +564,18 @@ return [
             ],
             'usuario\\V1\\Rest\\Telefones\\Controller' => [
                 'collection' => [
-                    'GET' => true,
-                    'POST' => true,
+                    'GET' => false,
+                    'POST' => false,
                     'PUT' => false,
                     'PATCH' => false,
                     'DELETE' => false,
                 ],
                 'entity' => [
-                    'GET' => true,
+                    'GET' => false,
                     'POST' => false,
-                    'PUT' => true,
-                    'PATCH' => true,
-                    'DELETE' => true,
+                    'PUT' => false,
+                    'PATCH' => false,
+                    'DELETE' => false,
                 ],
             ],
         ],

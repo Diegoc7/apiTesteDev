@@ -7,11 +7,11 @@ namespace usuario\V1\Rest\Biometria\Interfaces;
  */
 interface IBiometriaMapper
 {
-    public  function fetchAll();
+    public  function fetchAll($parametros = []);
 
-    public  function fetch($id);
+    public  function fetch($id, $id_usuario);
 
-    public  function save();
+    public  function save(array $entidade);
 
     public  function delete($id);
 }

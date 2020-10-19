@@ -13,6 +13,7 @@ use usuario\V1\Rest\Biometria\Abstracts\ABiometriaMapper;
 use usuario\V1\Rest\Biometria\Exceptions\IdBiometriaInvalidoException;
 use usuario\V1\Rest\Biometria\Exceptions\BiometriaNaoEncontradaException;
 use Laminas\ApiTools\Doctrine\Server\Event\DoctrineResourceEvent;
+use usuario\V1\Rest\Biometria\Interfaces\IBiometriaEntity;
 class BiometriaMapper extends ABiometriaMapper
 {
     private $tableGateway;
@@ -27,13 +28,10 @@ class BiometriaMapper extends ABiometriaMapper
         
     }
 
-    public function fetch( $id)
+    public function fetch($id, $id_usuario)
     {
-//        \Laminas\Authentication\Adapter\
-//        phpinfo();
-//        var_dump(info);exit;
         $this->validaIdBiometria($id);
-        $resposta = $this->tableGateway->select(array('id'=>$id));
+        $resposta = $this->tableGateway->select(array('id'=>$id, 'id_usuario' => $id_usuario));
         $biometria = $resposta->current();
         if(!$biometria){
              throw new BiometriaNaoEncontradaException("Biometria não encontrada.");
@@ -41,15 +39,26 @@ class BiometriaMapper extends ABiometriaMapper
          return $biometria;
     }
 
-    public function fetchAll()
+    public function fetchAll($parametros = [])
     {
-        $resultSet = $this->tableGateway->select();
+        $resultSet = $this->tableGateway->select($parametros);
          return $resultSet;
     }
 
-    public function save()
+    public function save(array $dados)
     {
+        $retornos = array();
+        foreach ($dados as $entidade){
+            if(!$entidade instanceof IBiometriaEntity){
+                continue;
+            }
+           $retornos[] = $entidade->getId() > 0 ? $this->tableGateway->update($entidade->getArrayCopy()) : $this->tableGateway->insert($entidade->getArrayCopy());
 
+//            $entidade->getArrayCopy();
+        }
+        return $retornos;
+//        $this->tableGateway->insert($dados);
+//        $this->tableGateway->update($dados);
     }
 
     private function validaIdBiometria($id){
