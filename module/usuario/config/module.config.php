@@ -218,6 +218,7 @@ return [
             'usuario\\V1\\Rest\\Biometria\\Controller' => [
                 0 => 'application/vnd.usuario.v1+json',
                 1 => 'application/json',
+                2 => 'multipart/form-data',
             ],
             'usuario\\V1\\Rest\\Cadastro_usuario\\Controller' => [
                 0 => 'application/vnd.usuario.v1+json',

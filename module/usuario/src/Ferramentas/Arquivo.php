@@ -32,6 +32,5 @@ class Arquivo
         $rt = move_uploaded_file($_FILES['arquivo']['tmp_name'], $this->destino);
         touch($this->destino);
         return $this->destino;
-//        var_dump($rt, $_FILES['arquivo']['tmp_name']);exit;
     }
 }

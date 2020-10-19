@@ -25,7 +25,7 @@ class BiometriaMapper extends ABiometriaMapper
 
     public function delete($id)
     {
-        
+        $this->tableGateway->delete(array('id' => $id));
     }
 
     public function fetch($id, $id_usuario)
@@ -52,13 +52,9 @@ class BiometriaMapper extends ABiometriaMapper
             if(!$entidade instanceof IBiometriaEntity){
                 continue;
             }
-           $retornos[] = $entidade->getId() > 0 ? $this->tableGateway->update($entidade->getArrayCopy()) : $this->tableGateway->insert($entidade->getArrayCopy());
-
-//            $entidade->getArrayCopy();
+           $retornos[] = $entidade->getId() > 0 ? $this->tableGateway->update($entidade->getArrayCopy(), array('id' => $entidade->getId())) : $this->tableGateway->insert($entidade->getArrayCopy());
         }
         return $retornos;
-//        $this->tableGateway->insert($dados);
-//        $this->tableGateway->update($dados);
     }
 
     private function validaIdBiometria($id){

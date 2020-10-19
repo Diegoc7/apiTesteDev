@@ -40,7 +40,7 @@ class BiometriaResource extends AbstractResourceListener
      */
     public function delete($id)
     {
-        return new ApiProblem(405, 'The DELETE method has not been defined for individual resources');
+       return $this->mapper->delete($id);
     }
 
     /**
@@ -121,6 +121,15 @@ class BiometriaResource extends AbstractResourceListener
      */
     public function update($id, $data)
     {
-        return new ApiProblem(405, 'The PUT method has not been defined for individual resources');
+          $destino = 'data'.DIRECTORY_SEPARATOR.'biometrias';
+
+     $uploadArquivo = new \usuario\Ferramentas\Arquivo($this->getInputFilter()->getValue('arquivo'), $destino);
+     $arquivo = $uploadArquivo->mover();
+
+     $entidade = new BiometriaEntity();
+     $entidade->setId($id);
+     $entidade->setIdUsuario($this->getInputFilter()->getValue('id_usuario'));
+     $entidade->setArquivo($arquivo);
+     return $this->mapper->save(array($entidade));
     }
 }
