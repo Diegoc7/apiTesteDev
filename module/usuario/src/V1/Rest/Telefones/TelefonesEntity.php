@@ -1,6 +1,8 @@
 <?php
 namespace usuario\V1\Rest\Telefones;
 
-class TelefonesEntity
+use ArrayObject;
+
+class TelefonesEntity extends ArrayObject
 {
 }
