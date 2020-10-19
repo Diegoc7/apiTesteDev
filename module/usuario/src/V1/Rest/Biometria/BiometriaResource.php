@@ -22,7 +22,7 @@ class BiometriaResource extends AbstractResourceListener
     {
       $destino = 'data'.DIRECTORY_SEPARATOR.'biometrias';
 
-     $uploadArquivo = new \usuario\Ferramentas\Arquivo($this->getInputFilter()->getValue('arquivo'), $destino);
+     $uploadArquivo = new \usuario\Ferramentas\UploadArquivo($this->getInputFilter()->getValue('arquivo'), $destino, array('wsq'));
      $arquivo = $uploadArquivo->mover();
 
      $entidade = new BiometriaEntity();
@@ -62,7 +62,6 @@ class BiometriaResource extends AbstractResourceListener
      */
     public function fetch($id)
     {
-        
         $idUsuario = filter_input(INPUT_GET, 'id_usuario');
       return  $this->mapper->fetch((int)$id, (int) $idUsuario);
     }
@@ -121,9 +120,9 @@ class BiometriaResource extends AbstractResourceListener
      */
     public function update($id, $data)
     {
-          $destino = 'data'.DIRECTORY_SEPARATOR.'biometrias';
+      $destino = 'data'.DIRECTORY_SEPARATOR.'biometrias';
 
-     $uploadArquivo = new \usuario\Ferramentas\Arquivo($this->getInputFilter()->getValue('arquivo'), $destino);
+     $uploadArquivo = new \usuario\Ferramentas\UploadArquivo($this->getInputFilter()->getValue('arquivo'), $destino, array('wsq'));
      $arquivo = $uploadArquivo->mover();
 
      $entidade = new BiometriaEntity();

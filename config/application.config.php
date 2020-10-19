@@ -6,6 +6,8 @@
  * @license   https://github.com/laminas-api-tools/api-tools-skeleton/blob/master/LICENSE.md New BSD License
  */
 
+define('DIRETORIO_ARMAZENAMENTO_BIOMETRIAS', realpath(__DIR__).DIRECTORY_SEPARATOR);
+
 return [
     // Retrieve the list of modules for this application.
     'modules' => include __DIR__ . '/modules.config.php',

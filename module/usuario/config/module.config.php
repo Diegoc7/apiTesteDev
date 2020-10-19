@@ -374,14 +374,7 @@ return [
                         'options' => [],
                     ],
                 ],
-                'filters' => [
-                    0 => [
-                        'name' => \Laminas\Filter\File\RenameUpload::class,
-                        'options' => [
-                            'randomize' => true,
-                        ],
-                    ],
-                ],
+                'filters' => [],
                 'name' => 'arquivo',
                 'description' => 'arquivo com a biometria do tipo WSQ',
                 'type' => \Laminas\InputFilter\FileInput::class,
