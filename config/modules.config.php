@@ -27,5 +27,4 @@ return [
     'Laminas\\ApiTools\\Versioning',
     'Application',
     'usuario',
-    'Usuarios',
 ];
